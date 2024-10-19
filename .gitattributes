@@ -1,0 +1,28 @@
+# Handle line endings automatically for files detected as text
+# and leave all files detected as binary untouched.
+* text=auto
+
+#
+# The above will handle all files NOT found below
+#
+# These files are text and should be normalized (Convert crlf => lf)
+.gitattributes  eol=lf
+.editorconfig   eol=lf
+Makefile        eol=lf
+
+*.json          eol=lf
+*.sh            eol=lf
+*.tld           eol=lf
+*.txt           eol=lf
+*.yml           eol=lf linguist-detectable=true
+*.yaml          eol=lf linguist-detectable=true
+*.hcl           eol=lf
+*.tf            eol=lf
+*.mk            eol=lf
+*.md            eol=lf
+*.html          eol=lf linguist-detectable=false
+
+
+# These files are text and should be normalized (Convert lf => crlf) (only for windows files)
+*.ps1           eol=crlf
+*.ps1.tpl       eol=crlf
