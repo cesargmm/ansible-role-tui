@@ -7,9 +7,9 @@
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣰⣿⣿⠀⠀⠀⢠⣿⠉⠒⠢⠤⣀⠀⠀⠀⠀⠀⠀⠀⠀✨
 ⠀⠀⠀⠀⠀⠀⠀⠀⢀⠔⠊⢀⣳⣤⣤⣶⣾⣿⣿⣦⣤⣤⣤⣾⣿⣦⠀⠀⠀⠀⠀⠀
 ⠀⠀⠀    ⠀⢸⣿⡷⣾⡟⣟⢭⠙⠛⢱⣲⢹⢻⣿⣿⣿⡿⣿⣿⡀⠀⠀⠀⠀⠀
-⠀⠀⠀✨⠀⠀⠀⣿⣿⢠⢣⣯⡛⠀⠄⠈⠋⢀⡆⣿⡏⠁⠀⢸⣿⡇⠀⠀⠀⠀⠀
+⠀⠀⠀  ⠀⠀⠀⣿⣿⢠⢣⣯⡛⠀⠄⠈⠋⢀⡆⣿⡏⠁⠀⢸⣿⡇⠀⠀⠀⠀⠀
 ⠀⠀⠀  ⠀⠀⠀⠛⠻⡚⠺⠿⠟⢓⣢⡀⠚⠓⠚⠛⠃⢂⠄⠈⠉⠁⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠲⣀⠤⢲⠻⣐⡸⣀⢹⣶⣤⣀⠖⠁⠀⠀⠀⠀✨⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠲⣀⠤⢲⠻⣐⡸⣀⢹⣶⣤⣀⠖⠁⠀⠀⠀⠀⠀⠀⠀⠀
 ⠀⠀⠀⠀⠀⢀⠤⠒⠒⠤⣀⡠⠔⢇⠀⣀⡸⣆⠇⢹⣿⣿⣷⠢⠤⣀⠀⠀⠀⠀⠀⠀
 ⠀✨⠀⠀⠀⠉⡆⠀⠀⠀⢀⡠⠋⠓⠁⠀⠀⠀⢾⣿⣿⣿⣧⠀⠀⣑⡢⠀⠀⠀⠀
 ⠀  ⠀⠀⠀⠀⠈⠢⠤⠊⠁⠀⠀⠀✨⠀⠀⠀⠉⠁⠈⠻⠧⠊⠀⠀⠀⠀⠀⠀
@@ -22,12 +22,12 @@
 -------------------------------------------------
 ```
 
-This role customizes a welcome message when accessing via SSH to your machine.
+This role creates a welcome message when accessing via SSH to your machine, displaying a Pokémon text image and
+information about your system.
 
 > [!WARNING]
 > This role override your current .profile file as well as your /etc/update-motd.d/ directory. If you don't want to lose
-> your current configuration, please
-> make a backup of your current files.
+> your current configuration, please make a backup of your current files.
 
 ## Requirements
 
@@ -43,9 +43,12 @@ This role customizes a welcome message when accessing via SSH to your machine.
 | image              | Name of a text-based image file      | `jirachi`      | `string`                                                                                                 |
 
 > [!TIP]
-> You can check the available images in the [images](https://github.com/cesargmm/ansible-role-tui/tree/main/files/images) folder.
-> 
-> Images have been generated with Pokémon Gen III 64x64 sprites from [Bulbapedia](https://archives.bulbagarden.net/wiki/Category:Ruby_and_Sapphire_sprites), using [Lachan's Braille-ASCII-Art Generator](https://lachlanarthur.github.io/Braille-ASCII-Art/).
+> You can check the available images in
+> the [images](https://github.com/cesargmm/ansible-role-tui/tree/main/files/images) folder.
+>
+> Images have been generated with Pokémon Gen III 64x64 sprites
+> from [Bulbapedia](https://archives.bulbagarden.net/wiki/Category:Ruby_and_Sapphire_sprites),
+> using [Lachan's Braille-ASCII-Art Generator](https://lachlanarthur.github.io/Braille-ASCII-Art/).
 
 ## Example playbook
 
@@ -87,4 +90,4 @@ ansible-playbook -K -c local -e image_color_schema=white -e color_schema=cyan -e
 ![img](_Attachments/example-lugia.png)
 
 > [!WARNING]
-> This role won't work if your default shell is not `bash`.
+> This role won't work if your default shell isn't `bash`.
