@@ -10,4 +10,4 @@ cyan='\033[38;5;36m'
 white='\033[0;37m'
 RESET='\033[0m'
 
-cat ~/.images/{{ image }} | while read line; do echo -e "${{ image_color_schema }}\t${line}$RESET"; done
+cat {{ ansible_user_dir }}/.images/{{ image }} | while read line; do echo -e "${{ image_color_schema }}\t${line}$RESET"; done
