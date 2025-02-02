@@ -10,9 +10,13 @@ cyan='\033[38;5;36m'
 white='\033[0;37m'
 RESET='\033[0m'
 
+PPID1=`cat /proc/$PPID/status | grep PPid | awk '{ print $2 }'`
+PPID2=`cat /proc/$PPID1/status | grep PPid | awk '{ print $2 }'`
+USERNAME=`ps -x | grep $PPID2 | awk '{ print $6 }' |  sed "s/[[:digit:].-]//g"`
+
 echo -e "-------------------------------------------------"
 echo -e "${{ color_schema }} Hostname${RESET}:      $( hostname )"
-echo -e "${{ color_schema }} User${RESET}:          $( whoami )"
+echo -e "${{ color_schema }} User${RESET}:          $USERNAME"
 echo -e "${{ color_schema }} Date${RESET}:          $( date '+%Y-%m-%d %H:%M:%S' )"
 echo -e "${{ color_schema }} Uptime${RESET}:        $( uptime -p )"
 echo -e "${{ color_schema }} OS version${RESET}:    $( grep PRETTY_NAME /etc/os-release | cut -d'"' -f2 )"
