@@ -69,7 +69,7 @@ You can use the following playbook to test the role in your own machine:
   127.0.0.1
 ```
 
-Here are some ansible-playbook command examples:
+You can execute the ansible-playbook command by using the following examples:
 
 ```bash
 ansible-playbook -K -c local -i inventory/hosts playbooks/main.yml
@@ -91,3 +91,6 @@ ansible-playbook -K -c local -e image_color_schema=white -e color_schema=cyan -e
 
 > [!WARNING]
 > This role won't work if your default shell isn't `bash`.
+
+> [!TIP]
+> If you don't connect via SSH to the target machine (e.g. your localhost), you can uncomment the last 2 lines in your .profile file.
