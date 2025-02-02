@@ -1,0 +1,7 @@
+---
+# defaults file for ansible-role-tui
+
+color_schema: 'yellow'
+image_color_schema: '{{ color_schema }}'
+image_path: 'files/images/'
+image: 'jirachi'

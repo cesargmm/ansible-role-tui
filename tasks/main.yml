@@ -1,0 +1,5 @@
+---
+# tasks file for ansible-role-tui
+
+- name: Setup TASK
+  include_tasks: setup.yml
