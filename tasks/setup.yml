@@ -1,37 +1,16 @@
 ---
 # setup file for ansible-role-tui
 
-- name: Find all files inside /etc/update-motd.d/
-  ansible.builtin.find:
-    paths: /etc/update-motd.d/
-    file_type: file
-  register: motd_files
-
-- name: Define list of files to keep
-  ansible.builtin.set_fact:
-    files_to_keep:
-    - 00-header-lugia
-    - 00-header-mew
-
-
-- name: Remove all files except specified ones
-  ansible.builtin.file:
-    path: "{{ item.path }}"
-    state: absent
-  loop: "{{ motd_files.files }}"
-  when: item.path | basename not in files_to_keep
-
-- name: Add motd header template
-  become: yes
-  ansible.builtin.template:
-    src: "{{ item }}.j2"
-    dest: "/etc/update-motd.d/{{ item }}"
+- name: Copy image to ~/.images/
+  become_user: "{{ ansible_user_id }}"
+  ansible.builtin.copy:
+    src: "{{ image_path }}{{ image }}"
+    dest: "{{ ansible_user_dir }}/.images/"
     mode: '0755'
-  loop: "{{ files_to_keep }}"
 
 - name: Add .profile template
-  become: yes
+  become_user: "{{ ansible_user_id }}"
   ansible.builtin.template:
-    src: .profile.j2
-    dest: /etc/skel/.profile
+    src: ".profile.j2"
+    dest: "{{ ansible_user_dir }}/.profile"
     mode: '0755'
