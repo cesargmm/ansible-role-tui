@@ -8,9 +8,45 @@
     dest: "{{ ansible_user_dir }}/.images/"
     mode: '0755'
 
-- name: Add .profile template
+- name: Add .profile template to skel
+  become: yes
+  ansible.builtin.template:
+    src: ".profile.j2"
+    dest: "/etc/skel/.profile"
+    mode: '0755'
+
+- name: Add .profile template to user directory
   become_user: "{{ ansible_user_id }}"
   ansible.builtin.template:
     src: ".profile.j2"
     dest: "{{ ansible_user_dir }}/.profile"
     mode: '0755'
+
+- name: Find all files inside /etc/update-motd.d/
+  become: yes
+  ansible.builtin.find:
+    paths: "/etc/update-motd.d/"
+    file_type: any
+  register: motd_files
+
+- name: Define a list of files to keep
+  ansible.builtin.set_fact:
+    files_to_keep:
+    - 00-header
+    - 10-system-info
+
+- name: Remove all files except the specified ones
+  become: yes
+  ansible.builtin.file:
+    path: "{{ item.path }}"
+    state: absent
+  loop: "{{ motd_files.files }}"
+  when: item.path | basename not in files_to_keep
+
+- name: Add motd header template
+  become: yes
+  ansible.builtin.template:
+    src: "{{ item }}.j2"
+    dest: "/etc/update-motd.d/{{ item }}"
+    mode: '0755'
+  loop: "{{ files_to_keep }}"

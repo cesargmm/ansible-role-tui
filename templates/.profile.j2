@@ -39,13 +39,8 @@ RESET='\033[0m'
 # Set shell color scheme
 PS1="\[\e]0;\u@\h: \w\a\]${debian_chroot:+($debian_chroot)}\[${{ color_schema }}\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$"
 
-# Welcome message
-cat ~/.images/{{ image }} | while read line; do echo -e "${{ image_color_schema }}\t${line}$RESET"; done
-echo -e "-------------------------------------------------"
-echo -e "${{ color_schema }} Hostname${RESET}:      $( hostname )"
-echo -e "${{ color_schema }} User${RESET}:          $( whoami )"
-echo -e "${{ color_schema }} Date${RESET}:          $( date '+%Y-%m-%d %H:%M:%S' )"
-echo -e "${{ color_schema }} Uptime${RESET}:        $( uptime -p )"
-echo -e "${{ color_schema }} OS version${RESET}:    $( grep PRETTY_NAME /etc/os-release | cut -d'"' -f2 )"
-echo -e "${{ color_schema }} IP Address${RESET}:    $( ip addr show eth0 | grep 'inet ' | awk '{print $2}' )"
-echo -e "-------------------------------------------------"
+# Display image
+#/etc/update-motd.d/00-header
+
+# Display system info
+#/etc/update-motd.d/10-system-info
