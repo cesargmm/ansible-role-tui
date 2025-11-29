@@ -20,5 +20,14 @@ echo -e "${{ color_schema }} User${RESET}:          $USERNAME"
 echo -e "${{ color_schema }} Date${RESET}:          $( date '+%Y-%m-%d %H:%M:%S' )"
 echo -e "${{ color_schema }} Uptime${RESET}:        $( uptime -p )"
 echo -e "${{ color_schema }} OS version${RESET}:    $( grep PRETTY_NAME /etc/os-release | cut -d'"' -f2 )"
-echo -e "${{ color_schema }} IP Address${RESET}:    $( ip addr show eth0 | grep 'inet ' | awk '{print $2}' )"
+
+# Display IP addresses for all active network interfaces
+INTERFACES=$(ip -o link show | awk -F': ' '{print $2}' | grep -v '^lo$')
+for IFACE in $INTERFACES; do
+    IP_ADDR=$(ip addr show "$IFACE" | grep 'inet ' | awk '{print $2}' | head -n1)
+    if [ -n "$IP_ADDR" ]; then
+        echo -e "${{ color_schema }} IP ($IFACE)${RESET}:   $IP_ADDR"
+    fi
+done
+
 echo -e "-------------------------------------------------"
